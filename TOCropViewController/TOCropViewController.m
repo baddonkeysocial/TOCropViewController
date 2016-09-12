@@ -156,16 +156,15 @@
     [super viewDidAppear:animated];
     self.inTransition = NO;
     self.cropView.simpleRenderMode = NO;
-    if (animated && [UIApplication sharedApplication].statusBarHidden == NO) {
-        [UIView animateWithDuration:0.3f animations:^{ [self setNeedsStatusBarAppearanceUpdate]; }];
-        
-        if (self.cropView.gridOverlayHidden) {
-            [self.cropView setGridOverlayHidden:NO animated:YES];
-        }
-        
-        if (self.navigationController == nil) {
-            [self.cropView setBackgroundImageViewHidden:NO animated:YES];
-        }
+
+    [UIView animateWithDuration:(animated ? 0.3f : 0.0f) animations:^{ [self setNeedsStatusBarAppearanceUpdate]; }];
+    
+    if (self.cropView.gridOverlayHidden) {
+        [self.cropView setGridOverlayHidden:NO animated:animated];
+    }
+    
+    if (self.navigationController == nil) {
+        [self.cropView setBackgroundImageViewHidden:NO animated:animated];
     }
 }
 
